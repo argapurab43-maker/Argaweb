@@ -1,0 +1,75 @@
+body{
+  margin:0;
+  font-family:Arial;
+  background:linear-gradient(to bottom right, #000000, #2c2c2c);
+  color:white;
+}
+
+/* HEADER */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px;
+  background:#111;
+  box-shadow:0 0 10px black;
+}
+
+.topbar button{
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  background:white;
+  font-weight:bold;
+}
+
+/* CONTAINER */
+.container{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:85vh;
+}
+
+/* PAPAN */
+.chess-board{
+  width:640px;
+  height:640px;
+  display:grid;
+  grid-template-columns:repeat(8, 1fr);
+  border:5px solid white;
+  box-shadow:0 0 20px rgba(255,255,255,0.3);
+}
+
+/* KOTAK */
+.square{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:48px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.white{
+  background:#d8ffd8;
+}
+
+.green{
+  background:#4c8c4c;
+}
+
+/* HOVER */
+.square:hover{
+  filter:brightness(1.2);
+}
+
+/* BIDAK */
+.piece{
+  transition:0.2s;
+}
+
+.piece:hover{
+  transform:scale(1.1);
+}
