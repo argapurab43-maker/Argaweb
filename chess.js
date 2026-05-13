@@ -3,9 +3,7 @@ const game = new Chess();
 const statusText = document.getElementById("status");
 
 const board = Chessboard('board', {
-
   draggable: true,
-
   position: 'start',
 
   pieceTheme:
@@ -13,12 +11,10 @@ const board = Chessboard('board', {
 
   onDragStart: function(source, piece) {
 
-    // game selesai
     if (game.game_over()) {
       return false;
     }
 
-    // giliran putih/hitam
     if (
       (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
       (game.turn() === 'b' && piece.search(/^w/) !== -1)
@@ -35,7 +31,6 @@ const board = Chessboard('board', {
       promotion: 'q'
     });
 
-    // langkah ilegal
     if (move === null) {
       return 'snapback';
     }
@@ -46,7 +41,6 @@ const board = Chessboard('board', {
   onSnapEnd: function() {
     board.position(game.fen());
   }
-
 });
 
 function updateStatus() {
@@ -57,7 +51,6 @@ function updateStatus() {
     moveColor = "Hitam";
   }
 
-  // checkmate
   if (game.in_checkmate()) {
 
     statusText.innerHTML =
@@ -65,7 +58,6 @@ function updateStatus() {
 
   }
 
-  // draw
   else if (game.in_draw()) {
 
     statusText.innerHTML = "🤝 Draw!";
@@ -77,7 +69,6 @@ function updateStatus() {
     statusText.innerHTML =
       "Giliran: " + moveColor;
 
-    // check
     if (game.in_check()) {
       statusText.innerHTML += " — CHECK!";
     }
@@ -85,11 +76,8 @@ function updateStatus() {
 }
 
 function resetGame() {
-
   game.reset();
-
   board.start();
-
   updateStatus();
 }
 
