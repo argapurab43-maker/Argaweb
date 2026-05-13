@@ -1,41 +1,66 @@
-const board = document.getElementById("board");
+const game = new Chess();
 
-/* BIDAK CATUR */
-const pieces = [
-  "♜","♞","♝","♛","♚","♝","♞","♜",
-  "♟","♟","♟","♟","♟","♟","♟","♟",
-  "","","","","","","","",
-  "","","","","","","","",
-  "","","","","","","","",
-  "","","","","","","","",
-  "♙","♙","♙","♙","♙","♙","♙","♙",
-  "♖","♘","♗","♕","♔","♗","♘","♖"
-];
+    if (game.game_over()) return false;
 
-/* BUAT PAPAN */
-for(let i = 0; i < 64; i++){
+    if (
+      (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+      (game.turn() === 'b' && piece.search(/^w/) !== -1)
+    ) {
+      return false;
+    }
+  },
 
-  const square = document.createElement("div");
+  onDrop: function (source, target) {
 
-  square.classList.add("square");
+    const move = game.move({
+      from: source,
+      to: target,
+      promotion: 'q'
+    });
 
-  /* WARNA PAPAN */
-  let row = Math.floor(i / 8);
-  let col = i % 8;
+    if (move === null) return 'snapback';
 
-  if((row + col) % 2 == 0){
-    square.classList.add("white");
-  }else{
-    square.classList.add("green");
+    updateStatus();
+  },
+
+  onSnapEnd: function () {
+    board.position(game.fen());
+  }
+});
+
+function updateStatus() {
+
+  let moveColor = 'Putih';
+
+  if (game.turn() === 'b') {
+    moveColor = 'Hitam';
   }
 
-  /* BIDAK */
-  square.innerHTML = `<span class="piece">${pieces[i]}</span>`;
+  if (game.in_checkmate()) {
+    statusText.innerHTML = '🏆 Checkmate! ' + moveColor + ' kalah';
+  }
 
-  board.appendChild(square);
+  else if (game.in_draw()) {
+    statusText.innerHTML = '🤝 Draw!';
+  }
+
+  else {
+    statusText.innerHTML = 'Giliran: ' + moveColor;
+
+    if (game.in_check()) {
+      statusText.innerHTML += ' — CHECK!';
+    }
+  }
 }
 
-/* TOMBOL KEMBALI */
+function resetGame(){
+  game.reset();
+  board.start();
+  updateStatus();
+}
+
 function kembali(){
   window.location.href = "game.html";
 }
+
+updateStatus();
