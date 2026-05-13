@@ -1,21 +1,79 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>Game</title>
+  <meta charset="UTF-8">
+  <title>Beranda Game</title>
+
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: Arial;
+      margin: 0;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111;
+      padding: 15px;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .game-card {
+      background: #1e1e1e;
+      padding: 20px;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .game-card:hover {
+      background: #333;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
 
-<h2>🎮 Pilih Game</h2>
+<!-- HEADER -->
+<div class="topbar">
+  <h2>🎮 Beranda Game</h2>
 
-<button onclick="goChess()">♟️ Catur</button><br><br>
-<button disabled>❌ TicTacToe (Coming Soon)</button>
+  <button onclick="kembali()">⬅ Kembali</button>
+</div>
+
+<!-- GAME -->
+<div class="container">
+
+  <div class="game-card" onclick="mainChess()">
+    <h2>♟️ Catur</h2>
+    <p>Main chess di sini</p>
+  </div>
+
+</div>
 
 <script>
-function goChess() {
+
+function kembali() {
+  window.location.href = "beranda.html";
+}
+
+function mainChess() {
   window.location.href = "chess.html";
 }
+
 </script>
 
 </body>
