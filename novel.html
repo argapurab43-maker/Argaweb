@@ -1,23 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Novel</title>
+  <meta charset="UTF-8">
+  <title>Novel</title>
+
+  <link rel="stylesheet" href="novel.css">
 </head>
+
 <body>
 
-<h2>📖 Novel</h2>
+<!-- HEADER -->
+<div class="topbar">
 
-<button onclick="kembali()">⬅ Kembali</button>
-<button onclick="jadiPenulis()">Jadi Penulis</button>
+  <h2>📖 Novel</h2>
 
-<br><br>
+  <div class="top-buttons">
 
-<button id="addBtn">➕ Tambah Novel</button>
+    <button onclick="jadiPenulis()">
+      ✍️ Jadi Penulis
+    </button>
+
+    <button onclick="kembali()">
+      ⬅ Kembali
+    </button>
+
+  </div>
+
+</div>
+
+<!-- LIST NOVEL -->
+<div class="novel-container">
+
+  <div class="novel-card" onclick="bacaNovel()">
+
+    <h2>Legenda Pulau Gelap</h2>
+
+    <p>Penulis: Arga</p>
+
+  </div>
+
+  <div class="novel-card">
+
+    <h2>Malam Terakhir</h2>
+
+    <p>Penulis: Unknown</p>
+
+  </div>
+
+</div>
+
+<!-- BUTTON + -->
+<button id="addBtn">+</button>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCLu1POb4qzy6yqZ9gz6xHu4u_HlJ8BMMY",
@@ -29,30 +80,50 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
+
 const db = getFirestore(app);
 
-async function getRole(user) {
+async function getRole(user){
+
   const ref = doc(db, "users", user.uid);
+
   const snap = await getDoc(ref);
+
   return snap.data().role;
 }
 
 onAuthStateChanged(auth, async (user) => {
+
   let role = await getRole(user);
 
-  if (role !== "admin" && role !== "penulis") {
+  if(role !== "admin" && role !== "penulis"){
+
     document.getElementById("addBtn").style.display = "none";
+
   }
+
 });
 
-window.kembali = function() {
+window.kembali = function(){
+
   window.location.href = "beranda.html";
+
 }
 
-window.jadiPenulis = function() {
+window.jadiPenulis = function(){
+
   window.location.href = "register_penulis.html";
+
 }
+
+window.bacaNovel = function(){
+
+  alert("Halaman baca novel coming soon 😎");
+
+}
+
 </script>
 
 </body>
