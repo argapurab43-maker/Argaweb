@@ -5,7 +5,6 @@ body{
   color:white;
 }
 
-/* HEADER */
 .topbar{
   display:flex;
   justify-content:space-between;
@@ -20,56 +19,48 @@ body{
   border:none;
   border-radius:10px;
   cursor:pointer;
-  background:white;
   font-weight:bold;
 }
 
-/* CONTAINER */
 .container{
   display:flex;
   justify-content:center;
   align-items:center;
-  height:85vh;
+  min-height:85vh;
 }
 
-/* PAPAN */
-.chess-board{
-  width:640px;
-  height:640px;
-  display:grid;
-  grid-template-columns:repeat(8, 1fr);
-  border:5px solid white;
-  box-shadow:0 0 20px rgba(255,255,255,0.3);
-}
-
-/* KOTAK */
-.square{
+.game-box{
   display:flex;
-  justify-content:center;
+  flex-direction:column;
   align-items:center;
-  font-size:48px;
+  gap:20px;
+}
+
+#board{
+  width:600px;
+  max-width:95vw;
+  box-shadow:0 0 25px rgba(255,255,255,0.2);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.info{
+  text-align:center;
+}
+
+.info button{
+  padding:10px 20px;
+  border:none;
+  border-radius:10px;
   cursor:pointer;
-  transition:0.2s;
+  margin-top:10px;
+  font-size:16px;
 }
 
-.white{
-  background:#d8ffd8;
+.white-1e1d7{
+  background:#d8ffd8 !important;
 }
 
-.green{
-  background:#4c8c4c;
-}
-
-/* HOVER */
-.square:hover{
-  filter:brightness(1.2);
-}
-
-/* BIDAK */
-.piece{
-  transition:0.2s;
-}
-
-.piece:hover{
-  transform:scale(1.1);
+.black-3c85d{
+  background:#4c8c4c !important;
 }
