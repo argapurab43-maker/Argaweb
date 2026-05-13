@@ -2,30 +2,37 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Chess</title>
+  <title>Chess Game</title>
 
+  <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
   <link rel="stylesheet" href="chess.css">
 </head>
-
 <body>
 
-<!-- HEADER -->
 <div class="topbar">
-
   <h2>♟️ Chess</h2>
 
   <button onclick="kembali()">⬅ Kembali</button>
-
 </div>
 
-<!-- CONTAINER -->
 <div class="container">
 
-  <!-- PAPAN CATUR -->
-  <div class="chess-board" id="board"></div>
+  <div class="game-box">
+
+    <div id="board"></div>
+
+    <div class="info">
+      <h3 id="status">Giliran: Putih</h3>
+      <button onclick="resetGame()">🔄 Reset Game</button>
+    </div>
+
+  </div>
 
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
 <script src="chess.js"></script>
 
 </body>
