@@ -1,7 +1,24 @@
 const game = new Chess();
 
-    if (game.game_over()) return false;
+const statusText = document.getElementById("status");
 
+const board = Chessboard('board', {
+
+  draggable: true,
+
+  position: 'start',
+
+  pieceTheme:
+  'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
+
+  onDragStart: function(source, piece) {
+
+    // game selesai
+    if (game.game_over()) {
+      return false;
+    }
+
+    // giliran putih/hitam
     if (
       (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
       (game.turn() === 'b' && piece.search(/^w/) !== -1)
@@ -10,7 +27,7 @@ const game = new Chess();
     }
   },
 
-  onDrop: function (source, target) {
+  onDrop: function(source, target) {
 
     const move = game.move({
       from: source,
@@ -18,48 +35,65 @@ const game = new Chess();
       promotion: 'q'
     });
 
-    if (move === null) return 'snapback';
+    // langkah ilegal
+    if (move === null) {
+      return 'snapback';
+    }
 
     updateStatus();
   },
 
-  onSnapEnd: function () {
+  onSnapEnd: function() {
     board.position(game.fen());
   }
+
 });
 
 function updateStatus() {
 
-  let moveColor = 'Putih';
+  let moveColor = "Putih";
 
   if (game.turn() === 'b') {
-    moveColor = 'Hitam';
+    moveColor = "Hitam";
   }
 
+  // checkmate
   if (game.in_checkmate()) {
-    statusText.innerHTML = '🏆 Checkmate! ' + moveColor + ' kalah';
+
+    statusText.innerHTML =
+      "🏆 Checkmate! " + moveColor + " kalah";
+
   }
 
+  // draw
   else if (game.in_draw()) {
-    statusText.innerHTML = '🤝 Draw!';
+
+    statusText.innerHTML = "🤝 Draw!";
+
   }
 
   else {
-    statusText.innerHTML = 'Giliran: ' + moveColor;
 
+    statusText.innerHTML =
+      "Giliran: " + moveColor;
+
+    // check
     if (game.in_check()) {
-      statusText.innerHTML += ' — CHECK!';
+      statusText.innerHTML += " — CHECK!";
     }
   }
 }
 
-function resetGame(){
+function resetGame() {
+
   game.reset();
+
   board.start();
+
   updateStatus();
 }
 
-function kembali(){
+function kembali() {
   window.location.href = "game.html";
 }
 
