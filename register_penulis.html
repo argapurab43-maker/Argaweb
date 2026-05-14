@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Penulis</title>
+
+  <link rel="stylesheet" href="register_penulis.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="box">
+
+    <h1>✍️ Quiz Penulis</h1>
+
+    <p>
+      Jawab semua pertanyaan dengan benar
+      untuk menjadi penulis 🗿
+    </p>
+
+    <!-- SOAL 1 -->
+    <div class="question">
+
+      <h3>
+        1. Sebutkan minimal 5 genre novel
+      </h3>
+
+      <input
+      type="text"
+      id="q1"
+      placeholder="Pisahkan dengan koma">
+
+      <p id="r1"></p>
+
+    </div>
+
+    <!-- SOAL 2 -->
+    <div class="question">
+
+      <h3>
+        2. Apa itu protagonis?
+      </h3>
+
+      <input
+      type="text"
+      id="q2"
+      placeholder="Jawaban">
+
+      <p id="r2"></p>
+
+    </div>
+
+    <!-- SOAL 3 -->
+    <div class="question">
+
+      <h3>
+        3. Apa lawan kata protagonis?
+      </h3>
+
+      <input
+      type="text"
+      id="q3"
+      placeholder="Jawaban">
+
+      <p id="r3"></p>
+
+    </div>
+
+    <!-- SOAL 4 -->
+    <div class="question">
+
+      <h3>
+        4. Apa itu plot twist?
+      </h3>
+
+      <input
+      type="text"
+      id="q4"
+      placeholder="Jawaban">
+
+      <p id="r4"></p>
+
+    </div>
+
+    <!-- SOAL 5 -->
+    <div class="question">
+
+      <h3>
+        5. Kenapa penulis harus konsisten?
+      </h3>
+
+      <input
+      type="text"
+      id="q5"
+      placeholder="Jawaban">
+
+      <p id="r5"></p>
+
+    </div>
+
+    <button onclick="cekJawaban()">
+      🚀 Submit
+    </button>
+
+    <button onclick="kembali()">
+      ⬅ Kembali
+    </button>
+
+  </div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  updateDoc
+}
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCLu1POb4qzy6yqZ9gz6xHu4u_HlJ8BMMY",
+  authDomain: "argaa-web.firebaseapp.com",
+  projectId: "argaa-web",
+  storageBucket: "argaa-web.firebasestorage.app",
+  messagingSenderId: "85804841719",
+  appId: "1:85804841719:web:df2129e8586a445307f1f2"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+let currentUser = null;
+
+onAuthStateChanged(auth, (user) => {
+
+  currentUser = user;
+
+});
+
+window.cekJawaban = async function(){
+
+  let score = 0;
+
+  // SOAL 1
+  let q1 =
+  document.getElementById("q1")
+  .value
+  .toLowerCase();
+
+  let genre =
+  q1.split(",");
+
+  if(genre.length >= 5){
+
+    document.getElementById("r1")
+    .innerHTML = "Benar ✅";
+
+    score++;
+
+  }else{
+
+    document.getElementById("r1")
+    .innerHTML = "Salah ❌";
+
+  }
+
+  // SOAL 2
+  let q2 =
+  document.getElementById("q2")
+  .value
+  .toLowerCase();
+
+  if(
+    q2.includes("tokoh utama")
+  ){
+
+    document.getElementById("r2")
+    .innerHTML = "Benar ✅";
+
+    score++;
+
+  }else{
+
+    document.getElementById("r2")
+    .innerHTML = "Salah ❌";
+
+  }
+
+  // SOAL 3
+  let q3 =
+  document.getElementById("q3")
+  .value
+  .toLowerCase();
+
+  if(
+    q3.includes("antagonis")
+  ){
+
+    document.getElementById("r3")
+    .innerHTML = "Benar ✅";
+
+    score++;
+
+  }else{
+
+    document.getElementById("r3")
+    .innerHTML = "Salah ❌";
+
+  }
+
+  // SOAL 4
+  let q4 =
+  document.getElementById("q4")
+  .value
+  .toLowerCase();
+
+  if(
+    q4.includes("alur") ||
+    q4.includes("mengejutkan")
+  ){
+
+    document.getElementById("r4")
+    .innerHTML = "Benar ✅";
+
+    score++;
+
+  }else{
+
+    document.getElementById("r4")
+    .innerHTML = "Salah ❌";
+
+  }
+
+  // SOAL 5
+  let q5 =
+  document.getElementById("q5")
+  .value
+  .toLowerCase();
+
+  if(
+    q5.includes("konsisten") ||
+    q5.includes("rutin") ||
+    q5.includes("disiplin")
+  ){
+
+    document.getElementById("r5")
+    .innerHTML = "Benar ✅";
+
+    score++;
+
+  }else{
+
+    document.getElementById("r5")
+    .innerHTML = "Salah ❌";
+
+  }
+
+  // LOLOS
+  if(score >= 5){
+
+    await updateDoc(
+      doc(db, "users", currentUser.uid),
+      {
+        role: "penulis"
+      }
+    );
+
+    alert(
+      "🎉 Selamat! Kamu sekarang penulis 🔥"
+    );
+
+  }else{
+
+    alert(
+      "😭 Jawaban kamu belum cukup benar"
+    );
+
+  }
+
+}
+
+window.kembali = function(){
+
+  window.location.href = "novel.html";
+
+}
+
+</script>
+
+</body>
+</html>
