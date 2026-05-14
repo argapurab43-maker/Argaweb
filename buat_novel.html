@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buat Novel</title>
+
+  <link rel="stylesheet" href="buat_novel.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="topbar">
+
+  <h2>✍️ Buat Novel</h2>
+
+  <button onclick="kembali()">
+    ⬅ Kembali
+  </button>
+
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+
+  <!-- INPUT JUDUL -->
+  <input
+  type="text"
+  id="judul"
+  placeholder="Masukkan Judul Novel...">
+
+  <!-- KERTAS PUTIH -->
+  <textarea
+  id="isiNovel"
+  placeholder="Mulai menulis novel di sini..."></textarea>
+
+  <!-- BUTTON PUBLISH -->
+  <button class="publish-btn" onclick="publishNovel()">
+    🚀 Publish
+  </button>
+
+</div>
+
+<script src="buat_novel.js"></script>
+
+</body>
+</html>
