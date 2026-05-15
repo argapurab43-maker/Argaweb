@@ -29,23 +29,9 @@
 </div>
 
 <!-- LIST NOVEL -->
-<div class="novel-container">
-
-  <div class="novel-card" onclick="bacaNovel()">
-
-    <h2>Legenda Pulau Gelap</h2>
-
-    <p>Penulis: Arga</p>
-
-  </div>
-
-  <div class="novel-card">
-
-    <h2>Malam Terakhir</h2>
-
-    <p>Penulis: Unknown</p>
-
-  </div>
+<div
+class="novel-container"
+id="novelContainer">
 
 </div>
 
@@ -68,7 +54,9 @@ from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 import {
   getFirestore,
   doc,
-  getDoc
+  getDoc,
+  collection,
+  getDocs
 }
 from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
@@ -93,16 +81,34 @@ async function getRole(user){
 
   const snap = await getDoc(ref);
 
-  return snap.data().role;
+  if(snap.exists()){
+
+    return snap.data().role;
+
+  }
+
+  return "member";
 }
 
 onAuthStateChanged(auth, async (user) => {
 
+  if(!user){
+
+    window.location.href =
+    "login.html";
+
+    return;
+
+  }
+
   let role = await getRole(user);
 
-  if(role !== "admin" && role !== "penulis"){
+  if(role !== "admin" &&
+     role !== "penulis"){
 
-    document.getElementById("addBtn").style.display = "none";
+    document
+    .getElementById("addBtn")
+    .style.display = "none";
 
   }
 
@@ -110,27 +116,66 @@ onAuthStateChanged(auth, async (user) => {
 
 window.kembali = function(){
 
-  window.location.href = "beranda.html";
+  window.location.href =
+  "beranda.html";
 
 }
 
 window.jadiPenulis = function(){
 
-  window.location.href = "register_penulis.html";
+  window.location.href =
+  "register_penulis.html";
 
 }
 
-window.bacaNovel = function(){
+window.buatNovel = function(){
 
-  alert("Halaman baca novel coming soon 😎");
+  window.location.href =
+  "buat_novel.html";
+
+}
+
+async function loadNovels(){
+
+  const container =
+  document.getElementById(
+    "novelContainer"
+  );
+
+  container.innerHTML = "";
+
+  const querySnapshot =
+  await getDocs(
+    collection(db, "novels")
+  );
+
+  querySnapshot.forEach((docSnap) => {
+
+    const novel =
+    docSnap.data();
+
+    container.innerHTML += `
+
+      <div class="novel-card">
+
+        <h2>
+          ${novel.judul}
+        </h2>
+
+        <p>
+          Penulis:
+          ${novel.penulis}
+        </p>
+
+      </div>
+
+    `;
+
+  });
 
 }
 
-window.buatNovel = function() {
-
-  window.location.href = "buat_novel.html";
-
-}
+loadNovels();
 
 </script>
 
