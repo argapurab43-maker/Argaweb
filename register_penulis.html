@@ -276,7 +276,7 @@ window.cekJawaban = async function(){
 
     try{
 
-      await updateDoc(
+      await setDoc(
         doc(db, "users", currentUser.uid),
         {
           role: "penulis"
