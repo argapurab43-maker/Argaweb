@@ -77,9 +77,11 @@ const db = getFirestore(app);
 
 async function getRole(user){
 
-  const ref = doc(db, "users", user.uid);
+  const ref =
+  doc(db, "users", user.uid);
 
-  const snap = await getDoc(ref);
+  const snap =
+  await getDoc(ref);
 
   if(snap.exists()){
 
@@ -101,10 +103,13 @@ onAuthStateChanged(auth, async (user) => {
 
   }
 
-  let role = await getRole(user);
+  let role =
+  await getRole(user);
 
-  if(role !== "admin" &&
-     role !== "penulis"){
+  if(
+    role !== "admin" &&
+    role !== "penulis"
+  ){
 
     document
     .getElementById("addBtn")
@@ -144,20 +149,27 @@ async function loadNovels(){
 
   container.innerHTML = "";
 
-  const querySnapshot =
-  await getDocs(
-    collection(db, "novels")
-  );
+  try{
 
-  querySnapshot.forEach((docSnap) => {
+    const querySnapshot =
+    await getDocs(
+      collection(db, "novels")
+    );
 
-    const novel =
-    docSnap.data();
+    querySnapshot.forEach((docSnap) => {
 
-    container.innerHTML += `
+      const novel =
+      docSnap.data();
 
-      <div class="novel-card">
+      console.log(novel);
 
+      const card =
+      document.createElement("div");
+
+      card.className =
+      "novel-card";
+
+      card.innerHTML = `
         <h2>
           ${novel.judul}
         </h2>
@@ -166,12 +178,19 @@ async function loadNovels(){
           Penulis:
           ${novel.penulis}
         </p>
+      `;
 
-      </div>
+      container.appendChild(card);
 
-    `;
+    });
 
-  });
+  }
+
+  catch(error){
+
+    console.log(error);
+
+  }
 
 }
 
