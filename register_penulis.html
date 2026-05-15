@@ -280,7 +280,8 @@ window.cekJawaban = async function(){
         doc(db, "users", currentUser.uid),
         {
           role: "penulis"
-        }
+        },
+        { merge:true }
       );
 
       alert(
@@ -308,7 +309,7 @@ window.cekJawaban = async function(){
     );
 
   }
-
+  
 }
 
 window.kembali = function(){
