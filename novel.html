@@ -180,6 +180,28 @@ async function loadNovels(){
         </p>
       `;
 
+      card.onclick = function(){
+
+        localStorage.setItem(
+          "judulNovel",
+          novel.judul
+        );
+
+        localStorage.setItem(
+          "isiNovel",
+          novel.isi
+        );
+
+        localStorage.setItem(
+          "penulisNovel",
+          novel.penulis
+        );
+
+        window.location.href =
+        "halaman.html";
+
+      }
+
       container.appendChild(card);
 
     });
