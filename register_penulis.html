@@ -272,40 +272,42 @@ window.cekJawaban = async function(){
   }
 
   // LOLOS
-if(score >= 5){
+  if(score >= 5){
 
-  try{
+    try{
 
-    await updateDoc(
-      doc(db, "users", currentUser.uid),
-      {
-        role: "penulis"
-      }
-    );
+      await updateDoc(
+        doc(db, "users", currentUser.uid),
+        {
+          role: "penulis"
+        }
+      );
+
+      alert(
+        "🎉 Selamat! Kamu sekarang penulis 🔥"
+      );
+
+      window.location.href = "novel.html";
+
+    }
+
+    catch(error){
+
+      alert(
+        "❌ Error: " + error.message
+      );
+
+      console.log(error);
+
+    }
+
+  }else{
 
     alert(
-      "🎉 Selamat! Kamu sekarang penulis 🔥"
+      "😭 Jawaban kamu belum cukup benar"
     );
 
-    window.location.href = "novel.html";
-
   }
-
-  catch(error){
-
-    alert(
-      "❌ Error: " + error.message
-    );
-
-    console.log(error);
-
-  }
-
-}else{
-
-  alert(
-    "😭 Jawaban kamu belum cukup benar"
-  );
 
 }
 
