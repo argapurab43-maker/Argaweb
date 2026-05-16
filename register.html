@@ -15,139 +15,151 @@
 
 <div class="container">
 
-  <h1>
-    🚀 Register
-  </h1>
+  <div class="box">
 
-  <input
-  id="email"
-  type="email"
-  placeholder="Email">
+    <h1>
+      🚀 Register
+    </h1>
 
-  <input
-  id="password"
-  type="password"
-  placeholder="Password">
+    <p>
+      Buat akun dulu 😎🔥
+    </p>
 
-  <button onclick="register()">
-    Register
-  </button>
+    <input
+    id="email"
+    type="email"
+    placeholder="Masukkan Email">
 
-  <p>
+    <input
+    id="password"
+    type="password"
+    placeholder="Masukkan Password">
 
-    Sudah punya akun?
+    <button onclick="register()">
+      Register
+    </button>
 
-    <a href="login.html">
-      Login
-    </a>
+    <p class="login-text">
 
-  </p>
+      Sudah punya akun?
+
+      <a href="login.html">
+        Login
+      </a>
+
+    </p>
+
+  </div>
 
 </div>
 
 <script type="module">
 
-  import { initializeApp }
-  from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 
-  import {
-    getAuth,
-    createUserWithEmailAndPassword
-  }
-  from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword
+}
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 
-  import {
-    getFirestore,
-    doc,
-    setDoc
-  }
-  from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+import {
+  getFirestore,
+  doc,
+  setDoc
+}
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
-  const firebaseConfig = {
+const firebaseConfig = {
 
-    apiKey:
-    "AIzaSyCLu1POb4qzy6yqZ9gz6xHu4u_HlJ8BMMY",
+  apiKey:
+  "AIzaSyCLu1POb4qzy6yqZ9gz6xHu4u_HlJ8BMMY",
 
-    authDomain:
-    "argaa-web.firebaseapp.com",
+  authDomain:
+  "argaa-web.firebaseapp.com",
 
-    projectId:
-    "argaa-web",
+  projectId:
+  "argaa-web",
 
-    storageBucket:
-    "argaa-web.firebasestorage.app",
+  storageBucket:
+  "argaa-web.firebasestorage.app",
 
-    messagingSenderId:
-    "85804841719",
+  messagingSenderId:
+  "85804841719",
 
-    appId:
-    "1:85804841719:web:df2129e8586a445307f1f2"
-  };
+  appId:
+  "1:85804841719:web:df2129e8586a445307f1f2"
+};
 
-  const app =
-  initializeApp(firebaseConfig);
+const app =
+initializeApp(firebaseConfig);
 
-  const auth =
-  getAuth(app);
+const auth =
+getAuth(app);
 
-  const db =
-  getFirestore(app);
+const db =
+getFirestore(app);
 
-  window.register = function(){
+window.register = async function(){
 
-    let email =
-    document.getElementById(
-      "email"
-    ).value;
+  let email =
+  document.getElementById(
+    "email"
+  ).value;
 
-    let password =
-    document.getElementById(
-      "password"
-    ).value;
+  let password =
+  document.getElementById(
+    "password"
+  ).value;
 
-    createUserWithEmailAndPassword(
+  try{
+
+    const userCredential =
+    await createUserWithEmailAndPassword(
       auth,
       email,
       password
-    )
+    );
 
-    .then(async (userCredential) => {
+    const user =
+    userCredential.user;
 
-      const user =
-      userCredential.user;
+    await setDoc(
 
-      // SIMPAN DATABASE
-      await setDoc(
+      doc(
+        db,
+        "users",
+        user.uid
+      ),
 
-        doc(
-          db,
-          "users",
-          user.uid
-        ),
+      {
+        email: email,
+        role: "member"
+      }
 
-        {
-          email: email,
-          role: "member"
-        }
+    );
 
-      );
+    alert(
+      "🔥 Register berhasil"
+    );
 
-      alert(
-        "🔥 Berhasil daftar"
-      );
-
-      window.location.href =
-      "login.html";
-
-    })
-
-    .catch((error) => {
-
-      alert(error.message);
-
-    });
+    window.location.href =
+    "login.html";
 
   }
+
+  catch(error){
+
+    alert(
+      error.message
+    );
+
+    console.log(error);
+
+  }
+
+}
 
 </script>
 
