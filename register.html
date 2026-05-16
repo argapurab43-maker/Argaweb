@@ -1,40 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Register</title>
+
+  <link rel="stylesheet" href="register.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>
+    🚀 Register
+  </h1>
+
+  <input
+  id="email"
+  type="email"
+  placeholder="Email">
+
+  <input
+  id="password"
+  type="password"
+  placeholder="Password">
+
+  <button onclick="register()">
+    Register
+  </button>
+
+  <p>
+
+    Sudah punya akun?
+
+    <a href="login.html">
+      Login
+    </a>
+
+  </p>
+
+</div>
+
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
-  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+  import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+
+  import {
+    getAuth,
+    createUserWithEmailAndPassword
+  }
+  from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    doc,
+    setDoc
+  }
+  from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyCLu1POb4qzy6yqZ9gz6xHu4u_HlJ8BMMY",
-    authDomain: "argaa-web.firebaseapp.com",
-    projectId: "argaa-web",
-    storageBucket: "argaa-web.firebasestorage.app",
-    messagingSenderId: "85804841719",
-    appId: "1:85804841719:web:df2129e8586a445307f1f2"
+
+    apiKey:
+    "AIzaSyCLu1POb4qzy6yqZ9gz6xHu4u_HlJ8BMMY",
+
+    authDomain:
+    "argaa-web.firebaseapp.com",
+
+    projectId:
+    "argaa-web",
+
+    storageBucket:
+    "argaa-web.firebasestorage.app",
+
+    messagingSenderId:
+    "85804841719",
+
+    appId:
+    "1:85804841719:web:df2129e8586a445307f1f2"
   };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+  const app =
+  initializeApp(firebaseConfig);
 
-  window.register = function() {
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
+  const auth =
+  getAuth(app);
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        const user = userCredential.user;
+  const db =
+  getFirestore(app);
 
-        // 🔥 SIMPAN KE FIRESTORE
-        await setDoc(doc(db, "users", user.uid), {
+  window.register = function(){
+
+    let email =
+    document.getElementById(
+      "email"
+    ).value;
+
+    let password =
+    document.getElementById(
+      "password"
+    ).value;
+
+    createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    )
+
+    .then(async (userCredential) => {
+
+      const user =
+      userCredential.user;
+
+      // SIMPAN DATABASE
+      await setDoc(
+
+        doc(
+          db,
+          "users",
+          user.uid
+        ),
+
+        {
           email: email,
           role: "member"
-        });
+        }
 
-        alert("Berhasil daftar 🔥");
-        window.location.href = "login.html";
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+      );
+
+      alert(
+        "🔥 Berhasil daftar"
+      );
+
+      window.location.href =
+      "login.html";
+
+    })
+
+    .catch((error) => {
+
+      alert(error.message);
+
+    });
+
   }
+
 </script>
+
+</body>
+</html>
