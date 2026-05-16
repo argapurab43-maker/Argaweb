@@ -1,61 +1,122 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
   <meta charset="UTF-8">
+
   <title>Beranda</title>
+
+  <link rel="stylesheet" href="beranda.css">
+
 </head>
-<body style="background:black; color:white;">
 
-<!-- HEADER -->
-<div style="display:flex; justify-content:space-between; padding:10px;">
-  <div id="namaUser">👤 User</div>
-  <button onclick="logout()">Logout</button>
-</div>
+<body>
 
-<hr>
+  <!-- HEADER -->
+  <div class="topbar">
 
-<h2 style="text-align:center;">Menu</h2>
+    <div id="namaUser">
+      👤 User
+    </div>
 
-<div style="text-align:center;">
-  <button onclick="masukNovel()">📖 Novel</button>
-  <button onclick="masukGame()">🎮 Game</button>
-</div>
+    <button onclick="logout()">
+      Logout
+    </button>
 
-<!-- TOMBOL + -->
-<button id="btnTambah" onclick="tambahNovel()" 
-style="position:fixed; bottom:20px; right:20px; 
-background:blue; color:white; font-size:24px; border:none; border-radius:50%; width:50px; height:50px; display:none;">
-+
-</button>
+  </div>
+
+  <hr>
+
+  <h1 class="title">
+    🚀 Menu Utama
+  </h1>
+
+  <!-- MENU -->
+  <div class="menu">
+
+    <div class="card" onclick="masukNovel()">
+
+      <h2>📖 Novel</h2>
+
+      <p>
+        Baca dan buat novel keren 😎
+      </p>
+
+    </div>
+
+    <div class="card" onclick="masukGame()">
+
+      <h2>🎮 Game</h2>
+
+      <p>
+        Main game seru 🔥
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- TOMBOL + -->
+  <button
+  id="btnTambah"
+  onclick="tambahNovel()">
+
+    +
+
+  </button>
 
 <script>
-  let email = localStorage.getItem("email");
-  let role = localStorage.getItem("role");
+
+  let email =
+  localStorage.getItem("email");
+
+  let role =
+  localStorage.getItem("role");
 
   // tampilkan nama
-  document.getElementById("namaUser").innerText = "👤 " + email;
+  document.getElementById(
+    "namaUser"
+  ).innerText =
+  "👤 " + email;
 
-  // tampilkan tombol + hanya admin
-  if (role === "admin") {
-    document.getElementById("btnTambah").style.display = "block";
+  // tombol +
+  if(role === "admin"){
+
+    document.getElementById(
+      "btnTambah"
+    ).style.display = "block";
+
   }
 
-  function logout() {
+  function logout(){
+
     localStorage.clear();
-    window.location.href = "index.html";
+
+    window.location.href =
+    "index.html";
   }
 
-  function masukNovel() {
-    window.location.href = "novel.html";
+  function masukNovel(){
+
+    window.location.href =
+    "novel.html";
   }
 
-  function masukGame() {
-    window.location.href = "game.html";
+  function masukGame(){
+
+    window.location.href =
+    "game.html";
   }
 
-  function tambahNovel() {
-    alert("Fitur tambah novel (next step 🔥)");
+  function tambahNovel(){
+
+    alert(
+      "🔥 Fitur tambah novel coming soon"
+    );
+
   }
+
 </script>
 
 </body>
