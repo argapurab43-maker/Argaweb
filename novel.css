@@ -1,72 +1,127 @@
+/* =========================
+   novel.css
+========================= */
+
 body{
+
   margin:0;
-  font-family:Arial;
-  background:linear-gradient(to bottom right,#000,#2b2b2b);
-  color:white;
-}
-
-/* HEADER */
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px;
-  background:#111;
-}
-
-.top-buttons{
-  display:flex;
-  gap:10px;
-}
-
-.topbar button{
-  padding:10px 15px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-/* CONTAINER */
-.novel-container{
   padding:20px;
+
+  font-family:Arial, sans-serif;
+
+  background:
+  linear-gradient(
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.75)
+  ),
+  url("bg.jpg");
+
+  background-size:cover;
+  background-position:center;
+
+  color:white;
+
+  min-height:100vh;
+}
+
+.topbar{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:30px;
+}
+
+.top-buttons button{
+
+  margin-left:10px;
+}
+
+button{
+
+  border:none;
+
+  border-radius:15px;
+
+  padding:12px 20px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #2457ff,
+    #6a00ff
+  );
+
+  color:white;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:0.25s;
+}
+
+button:hover{
+
+  transform:scale(1.05);
+
+  box-shadow:
+  0 0 20px rgba(120,100,255,0.7);
+}
+
+.novel-container{
+
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(250px,1fr));
+
   gap:20px;
 }
 
-/* CARD */
 .novel-card{
-  background:#1e1e1e;
+
+  background:
+  rgba(15,15,15,0.45);
+
+  backdrop-filter:blur(12px);
+
+  border-radius:20px;
+
   padding:20px;
-  border-radius:15px;
+
   cursor:pointer;
-  transition:0.3s;
-  box-shadow:0 0 10px rgba(255,255,255,0.1);
+
+  transition:0.25s;
+
+  border:
+  1px solid rgba(255,255,255,0.08);
 }
 
 .novel-card:hover{
+
   transform:translateY(-5px);
-  background:#2d2d2d;
+
+  box-shadow:
+  0 0 25px rgba(120,100,255,0.5);
 }
 
-/* BUTTON + */
 #addBtn{
+
   position:fixed;
-  bottom:20px;
+
   right:20px;
 
-  width:60px;
-  height:60px;
+  bottom:20px;
 
-  border:none;
+  width:65px;
+
+  height:65px;
+
   border-radius:50%;
 
-  background:blue;
-  color:white;
-
-  font-size:35px;
-  cursor:pointer;
-
-  box-shadow:0 0 15px rgba(0,0,255,0.5);
+  font-size:30px;
 }
