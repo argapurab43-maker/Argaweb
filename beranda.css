@@ -1,0 +1,88 @@
+/* =========================
+   beranda.css
+========================= */
+
+body{
+
+  margin:0;
+
+  padding:20px;
+
+  font-family:Arial;
+
+  background:
+  linear-gradient(
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.75)
+  ),
+  url("bg.jpg");
+
+  background-size:cover;
+
+  color:white;
+}
+
+.container{
+
+  max-width:1000px;
+
+  margin:auto;
+}
+
+.menu{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(220px,1fr));
+
+  gap:20px;
+}
+
+.card{
+
+  background:
+  rgba(15,15,15,0.45);
+
+  backdrop-filter:blur(12px);
+
+  border-radius:25px;
+
+  padding:25px;
+
+  text-align:center;
+
+  cursor:pointer;
+
+  transition:0.25s;
+}
+
+.card:hover{
+
+  transform:translateY(-5px);
+
+  box-shadow:
+  0 0 25px rgba(120,100,255,0.5);
+}
+
+button{
+
+  border:none;
+
+  border-radius:15px;
+
+  padding:12px 20px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #2457ff,
+    #6a00ff
+  );
+
+  color:white;
+
+  font-weight:bold;
+
+  cursor:pointer;
+}
