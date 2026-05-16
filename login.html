@@ -1,60 +1,153 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
   <meta charset="UTF-8">
+
   <title>Login</title>
+
+  <link rel="stylesheet" href="login.css">
+
 </head>
+
 <body>
 
-<h2>Login</h2>
+<div class="container">
 
-<input id="loginUser" type="email" placeholder="Email"><br><br>
-<input id="loginPass" type="password" placeholder="Password"><br><br>
+  <h1>
+    🔐 Login
+  </h1>
 
-<button onclick="login()">Login</button>
+  <input
+  id="loginUser"
+  type="email"
+  placeholder="Email">
 
-<p>Belum punya akun? <a href="register.html">Register</a></p>
+  <input
+  id="loginPass"
+  type="password"
+  placeholder="Password">
+
+  <button onclick="login()">
+    Login
+  </button>
+
+  <p>
+
+    Belum punya akun?
+
+    <a href="register.html">
+      Register
+    </a>
+
+  </p>
+
+</div>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+  import { initializeApp }
+  from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+
+  import {
+    getAuth,
+    signInWithEmailAndPassword
+  }
+  from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyCLu1POb4qzy6yqZ9gz6xHu4u_HlJ8BMMY",
-    authDomain: "argaa-web.firebaseapp.com",
-    projectId: "argaa-web",
-    storageBucket: "argaa-web.firebasestorage.app",
-    messagingSenderId: "85804841719",
-    appId: "1:85804841719:web:df2129e8586a445307f1f2"
+
+    apiKey:
+    "AIzaSyCLu1POb4qzy6yqZ9gz6xHu4u_HlJ8BMMY",
+
+    authDomain:
+    "argaa-web.firebaseapp.com",
+
+    projectId:
+    "argaa-web",
+
+    storageBucket:
+    "argaa-web.firebasestorage.app",
+
+    messagingSenderId:
+    "85804841719",
+
+    appId:
+    "1:85804841719:web:df2129e8586a445307f1f2"
   };
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+  const app =
+  initializeApp(firebaseConfig);
 
-  window.login = function() {
-    let email = document.getElementById("loginUser").value;
-    let password = document.getElementById("loginPass").value;
+  const auth =
+  getAuth(app);
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        let emailUser = userCredential.user.email;
+  window.login = function(){
 
-        // 🔥 ADMIN MANUAL
-        if (emailUser === "argapurab43@gmail.com") {
-          localStorage.setItem("role", "admin");
-        } else {
-          localStorage.setItem("role", "member");
-        }
+    let email =
+    document.getElementById(
+      "loginUser"
+    ).value;
 
-        localStorage.setItem("email", emailUser);
+    let password =
+    document.getElementById(
+      "loginPass"
+    ).value;
 
-        alert("Login berhasil 🔥");
-        window.location.href = "beranda.html";
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    )
+
+    .then((userCredential) => {
+
+      let emailUser =
+      userCredential.user.email;
+
+      // ADMIN
+      if(
+        emailUser ===
+        "argapurab43@gmail.com"
+      ){
+
+        localStorage.setItem(
+          "role",
+          "admin"
+        );
+
+      }else{
+
+        localStorage.setItem(
+          "role",
+          "member"
+        );
+
+      }
+
+      localStorage.setItem(
+        "email",
+        emailUser
+      );
+
+      alert(
+        "🔥 Login berhasil"
+      );
+
+      window.location.href =
+      "beranda.html";
+
+    })
+
+    .catch((error) => {
+
+      alert(error.message);
+
+    });
+
   }
+
 </script>
 
 </body>
